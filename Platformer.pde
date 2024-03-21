@@ -21,3 +21,20 @@ void draw()
   John.move();
   John.gravity();
 }
+void keyPressed()
+{
+  if(key == 'a')
+  {
+	John.walkL();
+  } else if(key == 'd')
+  {
+	John.walkR();
+  } else
+  {
+	John.setWalk(false);
+	if(key == 'w')
+	{
+  	John.jump();
+	}
+  }
+}
