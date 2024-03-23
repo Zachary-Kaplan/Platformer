@@ -10,31 +10,38 @@ void draw()
   rect(0,900,1000,1000);
   if((int)John.getY() >= 900)
   {
-	John.setGrounded(true);
- 	System.out.println(John.getGrounded());
+    John.setGrounded(true);
+    John.setY(900);
   } else
   {
-	John.setGrounded(false);
+    John.setGrounded(false);
   }
+  System.out.println(John.myY);
   John.show();
-  System.out.println(John.myVX);
-  John.move();
   John.gravity();
+  John.move();
 }
+
 void keyPressed()
 {
   if(key == 'a')
   {
-	John.walkL();
-  } else if(key == 'd')
+  John.walkL();
+  } if(key == 'd')
   {
-	John.walkR();
-  } else
-  {
-	John.setWalk(false);
-	if(key == 'w')
-	{
-  	John.jump();
-	}
+  John.walkR();
   }
+  //if((key != 'd') && (key != 'a'))
+  //{
+  //  John.setWalk(false);
+  //}
+  if(key == 'w')
+  {
+    John.jump();
+  }
+}
+
+void keyReleased()
+{
+  John.setWalk(false);
 }
