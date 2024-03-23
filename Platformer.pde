@@ -16,7 +16,7 @@ void draw()
   {
     John.setGrounded(false);
   }
-  System.out.println(John.myY);
+  //System.out.println(John.myY);
   John.show();
   John.gravity();
   John.move();
