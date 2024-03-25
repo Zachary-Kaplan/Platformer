@@ -1,6 +1,6 @@
 class Blade extends Box
 {
-  boolean isFacingLeft;
+  protected boolean isFacingLeft;
   public Blade(Player player)
   {
   myLenX = 3;
