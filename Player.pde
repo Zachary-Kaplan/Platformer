@@ -1,6 +1,6 @@
 class Player extends Creature
 {
-  public int swordCooldown;
+  protected int swordCooldown;
   public Player()
   {
   myX = 500;
@@ -12,6 +12,7 @@ class Player extends Creature
   myHP = 10;
   isGrounded = false;
   swordCooldown = 0;
+  iFrames = 0;
   }
  
   //controls
@@ -39,13 +40,24 @@ class Player extends Creature
     myVX+= 0.03;
   }
   }
-  public void jump()
+  public void jump(ArrayList<Platform> Platfor)
   {
     if(isGrounded)
     {
       myVY = -1.5;
-      move();
-      isGrounded = false;
+      boolean collide = false;
+      for(int i = 0; i < Platfor.size(); i++)
+      {
+        if(willCollide(this, Platfor.get(i)))
+        {
+          collide = true;
+        }
+      }
+      if(!collide)
+      {
+        move();
+        isGrounded = false;
+      }
     }
   }
   public void attack()
