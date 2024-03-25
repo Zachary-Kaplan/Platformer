@@ -1,33 +1,25 @@
-class Player
+class Player extends Creature
 {
-  protected double myX, myY, myVX, myVY;
-  protected int myHP;
-  protected boolean isGrounded, isMoving;
- 
+  public int swordCooldown;
   public Player()
   {
   myX = 500;
   myY = 500;
+  myLenX = 5;
+  myLenY = 10;
   myVX = 0;
   myVY = 0;
   myHP = 10;
   isGrounded = false;
-  }
-  public void show()
-  {
-  ellipse((float)myX,(float)myY,7,7);
-  }
-  public void move()
-  {
-  myX += myVX;
-  myY += myVY;
+  swordCooldown = 0;
   }
  
   //controls
   public void walkL()
   {
   isMoving = true;
-  if(myVX < -1)
+  isFacingLeft = true;
+  if(myVX < -1.5)
   {
     //myVX+= 0.03;
   } else
@@ -38,7 +30,8 @@ class Player
   public void walkR()
   {
   isMoving = true;
-  if(myVX > 1)
+  isFacingLeft = false;
+  if(myVX > 1.5)
   {
     //myVX-= 0.03;
   } else
@@ -50,64 +43,21 @@ class Player
   {
     if(isGrounded)
     {
-      myVY = -1;
+      myVY = -1.5;
       move();
       isGrounded = false;
     }
   }
- 
-  //environmental dynamics
-  public void gravity()
+  public void attack()
   {
-  if(isGrounded)
-  {
-    myVY = 0;
-    if(!isMoving)
-    {
-      if(myVX > 0.1)
-      {
-        myVX-=0.06;
-      } else if(myVX < -0.1)
-      {
-        myVX+=0.06;
-      } else
-      {
-        myVX = 0;
-      }
-    }
-  } else
-  {
-    myVY+=0.03;
+    swordCooldown = 2 * (int)frameRate;
   }
-  }
- 
-  public double getX()
+  public int getCooldown()
   {
-  return myX;
+    return swordCooldown;
   }
-  public double getY()
+  public void decreaseCooldown(int num)
   {
-  return myY;
-  }
-  public boolean getGrounded()
-  {
-  return isGrounded;
-  }
-  
-  public void setX(int X)
-  {
-    myX = X;
-  }
-  public void setY(int Y)
-  {
-    myY = Y;
-  }
-  public void setGrounded(boolean groundState)
-  {
-  isGrounded = groundState;
-  }
-  public void setWalk(boolean walkState)
-  {
-  isMoving = walkState;
+    swordCooldown-=num;
   }
 }
