@@ -1,13 +1,18 @@
 Player John;
-Enemy Womp;
 Blade Sword;
+BoxMaker Jimmy;
 ArrayList<Platform> Platforms = new ArrayList<Platform>();
+ArrayList<Enemy> Enemies = new ArrayList<Enemy>();
 public boolean up,left,right;
 void setup()
 {
-  Womp = new Enemy();
   John = new Player();
   Sword = new Blade(John);
+  Jimmy = new BoxMaker();
+  for(int i = 0; i < 3; i++)
+  {
+    Enemies.add(new Enemy());
+  }
   up = false;
   left = false;
   right = false;
@@ -21,7 +26,7 @@ void draw()
   background(255);
   if(up)
   {
-    John.jump();
+    John.jump(Platforms);
   } if(left)
   {
     John.walkL();
@@ -49,39 +54,51 @@ void draw()
   {
     Sword.show(John);
     John.decreaseCooldown(1);
-    if(willCollide(Sword,Womp))
+    for(int i = 0; i < Enemies.size(); i++)
     {
-      Womp.setY(10);
+      if(willCollide(Sword,Enemies.get(i)))
+      {
+        Enemies.remove(i);
+      }
     }
+  }
+  if(John.getIFrames() > 0)
+  {
+    John.iFrameDecrease(1);
   }
   
-  
-  Womp.pathFind(John);
-  Womp.gravity();
-  Womp.show();
-  boolean collidesEnemyPlatform = false;
-  boolean collidesEnemyPlayer = false;
-  for(int i = 0; i < Platforms.size(); i++)
+  for(int i = 0; i < Enemies.size(); i++)
   {
-    Platforms.get(i).show();
-    if(willCollide(Womp, Platforms.get(i)))
+    Enemies.get(i).pathFind(John);
+    Enemies.get(i).gravity();
+    Enemies.get(i).show();
+    boolean collidesEnemyPlatform = false;
+    boolean collidesEnemyPlayer = false;
+    for(int j = 0; j < Platforms.size(); j++)
     {
-      collidesEnemyPlatform = true;
+      Platforms.get(j).show();
+      if(willCollide(Enemies.get(i), Platforms.get(j)))
+      {
+        collidesEnemyPlatform = true;
+      }
+      if(willCollide(Enemies.get(i),John))
+      {
+        collidesEnemyPlayer = true;
+      }
     }
-    if(willCollide(Womp,John))
+    Enemies.get(i).setGrounded(collidesEnemyPlatform);
+    if(collidesEnemyPlayer && (John.getIFrames() <= 0))
     {
-      collidesEnemyPlayer = true;
+      John.takeDamage(1);
+    }
+    if(!collidesEnemyPlatform)
+    {
+      Enemies.get(i).move();
     }
   }
-  Womp.setGrounded(collidesEnemyPlatform);
-  if(!collidesEnemyPlayer)
-  {
-    John.takeDamage(1);
-  }
-  if(!collidesEnemyPlatform)
-  {
-    Womp.move();
-  }
+  fill(250,0,0);
+  text("Health: " + John.getHP(), (float)John.getX(), (float)(John.getY() - 5));
+  fill(255);
 }
 
 void keyPressed()
@@ -116,6 +133,17 @@ void keyReleased()
   if(key == 'w')
   {
     up = false;
+  }
+}
+
+void mousePressed()
+{
+  if(Jimmy.getClicked())
+  {
+    Platforms.add(Jimmy.endNewBox(mouseX, mouseY));
+  } else
+  {
+    Jimmy.startNewBox(mouseX, mouseY);
   }
 }
 
