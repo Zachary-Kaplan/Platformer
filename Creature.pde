@@ -1,6 +1,6 @@
 class Creature extends Box
 {
-  protected int myHP;
+  protected int myHP, iFrames;
   protected boolean isGrounded, isMoving, isFacingLeft;
   public Creature()
   {
@@ -11,6 +11,7 @@ class Creature extends Box
   myVX = 0;
   myVY = 0;
   myHP = 10;
+  iFrames = 0;
   isGrounded = false;
   isFacingLeft = false;
   }
@@ -77,9 +78,22 @@ class Creature extends Box
   {
     return isFacingLeft;
   }
+  public int getHP()
+  {
+    return myHP;
+  }
+  public int getIFrames()
+  {
+    return iFrames;
+  }
   public void takeDamage(int damage)
   {
     myHP-=damage;
+    iFrames = (int)frameRate;
+  }
+  public void iFrameDecrease(int num)
+  {
+    iFrames-=num;
   }
   public void setX(int X)
   {
