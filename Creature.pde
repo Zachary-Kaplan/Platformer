@@ -116,10 +116,10 @@ class Creature extends Box
       myVY = -0.35;
       if(myX > source.getX())
       {
-        myVX = 0.35;
+        myVX = 0.7;
       } else
       {
-        myVX = -0.35;
+        myVX = -0.7;
       }
     }
   }
