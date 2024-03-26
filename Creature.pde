@@ -34,13 +34,24 @@ class Creature extends Box
   myVX = 0.5;
   isFacingLeft = false;
   }
-  public void jump()
+  public void jump(ArrayList<Platform> Platfor)
   {
     if(isGrounded)
     {
       myVY = -0.8;
-      move();
-      isGrounded = false;
+      boolean collide = false;
+      for(int i = 0; i < Platfor.size(); i++)
+      {
+        if(willCollide(this, Platfor.get(i)))
+        {
+          collide = true;
+        }
+      }
+      if(!collide)
+      {
+        move();
+        isGrounded = false;
+      }
     }
   }
   
@@ -86,10 +97,21 @@ class Creature extends Box
   {
     return iFrames;
   }
-  public void takeDamage(int damage)
+  public void takeDamage(int damage, Creature source)
   {
-    myHP-=damage;
-    iFrames = (int)frameRate;
+    if(iFrames <= 0)
+    {
+      myHP-=damage;
+      iFrames = 3 * (int)frameRate;
+      myVY = -0.35;
+      if(myX > source.getX())
+      {
+        myVX = 0.35;
+      } else
+      {
+        myVX = -0.35;
+      }
+    }
   }
   public void iFrameDecrease(int num)
   {
