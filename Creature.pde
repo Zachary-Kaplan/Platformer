@@ -108,7 +108,7 @@ class Creature extends Box
   {
     return iFrames;
   }
-  public void takeDamage(int damage, Creature source)
+  public void takeDamage(int damage, Creature source, ArrayList<Platform> Platfor)
   {
     if(iFrames <= 0)
     {
@@ -121,6 +121,19 @@ class Creature extends Box
       } else
       {
         myVX = -0.7;
+      }
+      boolean collide = false;
+      for(int i = 0; i < Platfor.size(); i++)
+      {
+        if(willCollide(this, Platfor.get(i)))
+        {
+          collide = true;
+        }
+      }
+      if(!collide)
+      {
+        move();
+        isGrounded = false;
       }
     }
   }
