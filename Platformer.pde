@@ -3,6 +3,7 @@ Blade Sword;
 BoxMaker Jimmy;
 ArrayList<Platform> Platforms = new ArrayList<Platform>();
 ArrayList<Enemy> Enemies = new ArrayList<Enemy>();
+ArrayList<Coin> Coins = new ArrayList<Coin>();
 public boolean up,left,right;
 void setup()
 {
@@ -56,9 +57,23 @@ void draw()
     John.decreaseCooldown(1);
     for(int i = 0; i < Enemies.size(); i++)
     {
+      if(Enemies.get(i).getIFrames() > 0)
+      {  
+        Enemies.get(i).iFrameDecrease(1);
+      }
       if(willCollide(Sword,Enemies.get(i)))
       {
-        Enemies.remove(i);
+        System.out.println("ow");
+        Enemies.get(i).takeDamage(1,John);
+        if(Enemies.get(i).getHP() <= 0)
+        {
+          for(int j = 0; j < (int)(3 * Math.random()); j++)
+          {
+            Coins.add(new Coin(Enemies.get(i)));
+          }
+          Coins.add(new Coin(Enemies.get(i)));
+          Enemies.remove(i);
+        }
       }
     }
   }
@@ -69,7 +84,7 @@ void draw()
   
   for(int i = 0; i < Enemies.size(); i++)
   {
-    Enemies.get(i).pathFind(John);
+    Enemies.get(i).pathFind(John,Platforms);
     Enemies.get(i).gravity();
     Enemies.get(i).show();
     boolean collidesEnemyPlatform = false;
@@ -87,17 +102,47 @@ void draw()
       }
     }
     Enemies.get(i).setGrounded(collidesEnemyPlatform);
-    if(collidesEnemyPlayer && (John.getIFrames() <= 0))
+    if(collidesEnemyPlayer)
     {
-      John.takeDamage(1);
+      John.takeDamage(1,Enemies.get(i));
     }
     if(!collidesEnemyPlatform)
     {
       Enemies.get(i).move();
     }
   }
+  for(int i = 0; i < Coins.size(); i++)
+  {
+    Coins.get(i).gravity();
+    Coins.get(i).show();
+    boolean collidesCoinPlatform = false;
+    boolean collidesCoinPlayer = false;
+    for(int j = 0; j < Platforms.size(); j++)
+    {
+      if(willCollide(Coins.get(i), Platforms.get(j)))
+      {
+        collidesCoinPlatform = true;
+      }
+      if(willCollide(Coins.get(i),John))
+      {
+        collidesCoinPlayer = true;
+      }
+    }
+    Coins.get(i).setGrounded(collidesCoinPlatform);
+    if(!collidesCoinPlatform)
+    {
+      Coins.get(i).move();
+    }
+    if(collidesCoinPlayer)
+    {
+      John.changeCoin(1);
+      Coins.remove(i);
+      i--;
+    }
+  }
   fill(250,0,0);
   text("Health: " + John.getHP(), (float)John.getX(), (float)(John.getY() - 5));
+  text("Coins: " + John.getCoin(), (float)John.getX(), (float)(John.getY() - 15));
   fill(255);
 }
 
