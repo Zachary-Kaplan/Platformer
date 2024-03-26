@@ -18,7 +18,10 @@ class Creature extends Box
 
   public void show()
   {
-    fill(0,255,0);
+    if(iFrames > 0)
+    {
+      fill(0,0,255);
+    }
     super.show();
     fill(255);
   }
