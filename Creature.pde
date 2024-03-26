@@ -1,4 +1,3 @@
-
 class Creature extends Box
 {
   protected int myHP, iFrames;
@@ -36,13 +35,19 @@ class Creature extends Box
   public void walkL()
   {
   isMoving = true;
-  myVX = -0.5;
+  if(myVX > -0.5)
+  {
+    myVX += -0.05;
+  }
   isFacingLeft = true;
   }
   public void walkR()
   {
   isMoving = true;
-  myVX = 0.5;
+  if(myVX < 0.5)
+  {
+    myVX += 0.05;
+  }
   isFacingLeft = false;
   }
   public void jump(ArrayList<Platform> Platfor)
@@ -121,20 +126,6 @@ class Creature extends Box
       } else
       {
         myVX = -0.7;
-      }
-      boolean collide = false;
-      for(int i = 0; i < Platfor.size(); i++)
-      {
-        if(willCollide(this, Platfor.get(i)))
-        {
-          collide = true;
-        }
-      }
-      if(!collide)
-      {
-        move();
-        move();
-        isGrounded = false;
       }
     }
   }
