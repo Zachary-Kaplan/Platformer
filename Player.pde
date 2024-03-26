@@ -111,19 +111,19 @@ class Player extends Creature
   public void burn(int num)
   {
     burnCoolDown = (int)frameRate;
-    if(myWick - myWax < 3)
+    if(myHP - myWax < 3)
     {
       myWax-=num;
-    } else if(myWick <  myWax)
+    } else if(myHP <  myWax)
     {
-      myWax = myWick - 3;
-    }else if(myWick - myWax >= 3)
+      myWax = myHP - 3;
+    }else if(myHP - myWax >= 3)
     {
-      myWick-=num;
+      myHP-=num;
     }
-    if(myWick - myWax > 10)
+    if(myHP - myWax > 10)
     {
-      myWick-=num;
+      myHP-=num;
     }
   }
   public void burnDecrease(int num)
