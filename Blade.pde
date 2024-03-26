@@ -4,7 +4,7 @@ class Blade extends Box
   public Blade(Player player)
   {
   myLenX = 3;
-  myLenY = 2;
+  myLenY = 5;
   myVX = 0;
   myVY = 0;
   isFacingLeft = player.getFacing();
