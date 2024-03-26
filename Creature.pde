@@ -1,7 +1,7 @@
+
 class Creature extends Box
 {
-  protected int iFrames, burnCooldown;
-  protected int myWick, myWax;
+  protected int myHP, iFrames;
   protected boolean isGrounded, isMoving, isFacingLeft;
   public Creature()
   {
@@ -11,8 +11,7 @@ class Creature extends Box
   myLenY = 10;
   myVX = 0;
   myVY = 0;
-  myWick = 50;
-  myWax = 30;
+  myHP = 10;
   iFrames = 0;
   isGrounded = false;
   isFacingLeft = false;
@@ -101,27 +100,19 @@ class Creature extends Box
   {
     return isFacingLeft;
   }
-  public int getWick()
+  public int getHP()
   {
-    return myWick;
-  }
-  public int getWax()
-  {
-    return myWax;
+    return myHP;
   }
   public int getIFrames()
   {
     return iFrames;
   }
-  public int getBurnCD()
-  {
-    return burnCoolDown;
-  }
   public void takeDamage(int damage, Creature source)
   {
     if(iFrames <= 0)
     {
-      myWax-=damage;
+      myHP-=damage;
       iFrames = 3 * (int)frameRate;
       myVY = -0.35;
       if(myX > source.getX())
@@ -132,26 +123,6 @@ class Creature extends Box
         myVX = -0.7;
       }
     }
-  }
-  public void melt(int num)
-  {
-    if(myWick - myWax < 5)
-    {
-      myWax-=num;
-    }
-  }
-  public void burn(int num)
-  {
-    if(myWick - myWax > 10)
-    {
-      myWick-=num;
-    }
-    myWick-=num;
-    burnCooldown = (int)frameRate;
-  }
-  public void burnDecrease(int num)
-  {
-    burnCooldown-=1;
   }
   public void iFrameDecrease(int num)
   {
