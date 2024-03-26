@@ -37,6 +37,13 @@ void draw()
   }
   John.show();
   John.gravity();
+  if(John.getMeltCD() > 0)
+  {
+    John.burnDecrease(1);
+  } else
+  {
+    John.burn(1);
+  }
   boolean collidesPlayerPlatform = false;
   for(int i = 0; i < Platforms.size(); i++)
   {
@@ -140,8 +147,9 @@ void draw()
     }
   }
   fill(250,0,0);
-  text("Health: " + John.getHP(), (float)John.getX(), (float)(John.getY() - 5));
-  text("Coins: " + John.getCoin(), (float)John.getX(), (float)(John.getY() - 15));
+  text("Wick: " + John.getHP(), (float)John.getX(), (float)(John.getY() - 5));
+  text("Wax: " + John.getWax(), (float)John.getX(), (float)(John.getY() - 15));
+  text("Coins: " + John.getCoin(), (float)John.getX(), (float)(John.getY() - 25));
   fill(255);
 }
 
