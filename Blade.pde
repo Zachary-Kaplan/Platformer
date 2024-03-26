@@ -3,7 +3,7 @@ class Blade extends Box
   protected boolean isFacingLeft;
   public Blade(Player player)
   {
-  myLenX = 5;
+  myLenX = 10;
   myLenY = 3;
   myVX = 0;
   myVY = 0;
