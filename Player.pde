@@ -1,6 +1,6 @@
 class Player extends Creature
 {
-  protected int swordCooldown;
+  protected int swordCooldown, myCoin;
   public Player()
   {
   myX = 500;
@@ -13,6 +13,7 @@ class Player extends Creature
   isGrounded = false;
   swordCooldown = 0;
   iFrames = 0;
+  myCoin = 0;
   }
  
   //controls
@@ -71,5 +72,13 @@ class Player extends Creature
   public void decreaseCooldown(int num)
   {
     swordCooldown-=num;
+  }
+  public void changeCoin(int num)
+  {
+    myCoin += num;
+  }
+  public int getCoin()
+  {
+    return myCoin;
   }
 }
