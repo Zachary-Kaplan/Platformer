@@ -110,7 +110,7 @@ void draw()
     Enemies.get(i).setGrounded(collidesEnemyPlatform);
     if(collidesEnemyPlayer)
     {
-      John.takeDamage(1,Enemies.get(i));
+      John.takeDamage(5,Enemies.get(i));
     }
     if(!collidesEnemyPlatform)
     {
