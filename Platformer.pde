@@ -66,7 +66,7 @@ void draw()
     {
       if(willCollide(Sword,Enemies.get(i)))
       {
-        Enemies.get(i).takeDamage(1,John);
+        Enemies.get(i).takeDamage(1,John,Platforms);
         if(Enemies.get(i).getHP() <= 0)
         {
           for(int j = 0; j < (int)(3 * Math.random()); j++)
