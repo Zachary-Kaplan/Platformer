@@ -66,7 +66,7 @@ class Player extends Creature
   }
   public void attack()
   {
-    swordCooldown = 2 * (int)frameRate;
+    swordCooldown = (int)frameRate;
   }
   public int getCooldown()
   {
