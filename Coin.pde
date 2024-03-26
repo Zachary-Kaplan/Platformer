@@ -10,7 +10,7 @@ class Coin extends Creature
     myVY = -1 * Math.random();
   }
   public void show()
-  {
+  { 
     stroke(230,230,0);
     fill(250,250,0);
     ellipse((float)myX + (myLenX /2),(float)myY + (myLenX/2),myLenX,myLenY);
