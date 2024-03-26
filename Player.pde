@@ -88,6 +88,10 @@ class Player extends Creature
   {
     return myWax;
   }
+  public int getMeltCD()
+  {
+    return myMeltCD;
+  }
   public void takeDamage(int damage, Creature source)
   {
     if(iFrames <= 0)
@@ -106,6 +110,7 @@ class Player extends Creature
   }
   public void burn(int num)
   {
+    burnCoolDown = (int)frameRate;
     if(myWick - myWax < 3)
     {
       myWax-=num;
@@ -115,7 +120,6 @@ class Player extends Creature
     }else if(myWick - myWax >= 3)
     {
       myWick-=num;
-      burnCoolDown = (int)frameRate
     }
     if(myWick - myWax > 10)
     {
@@ -126,5 +130,4 @@ class Player extends Creature
   {
     burnCooldown-=num;
   }
-
 }
