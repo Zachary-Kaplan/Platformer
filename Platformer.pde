@@ -57,10 +57,6 @@ void draw()
     John.decreaseCooldown(1);
     for(int i = 0; i < Enemies.size(); i++)
     {
-      if(Enemies.get(i).getIFrames() > 0)
-      {  
-        Enemies.get(i).iFrameDecrease(1);
-      }
       if(willCollide(Sword,Enemies.get(i)))
       {
         Enemies.get(i).takeDamage(1,John);
@@ -86,6 +82,10 @@ void draw()
     Enemies.get(i).pathFind(John,Platforms);
     Enemies.get(i).gravity();
     Enemies.get(i).show();
+    if(Enemies.get(i).getIFrames() > 0)
+    {  
+      Enemies.get(i).iFrameDecrease(1);
+    }
     boolean collidesEnemyPlatform = false;
     boolean collidesEnemyPlayer = false;
     for(int j = 0; j < Platforms.size(); j++)
