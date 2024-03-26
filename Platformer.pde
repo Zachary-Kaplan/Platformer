@@ -63,7 +63,7 @@ void draw()
       }
       if(willCollide(Sword,Enemies.get(i)))
       {
-        System.out.println("ow");
+        //System.out.println("ow");
         Enemies.get(i).takeDamage(1,John);
         if(Enemies.get(i).getHP() <= 0)
         {
