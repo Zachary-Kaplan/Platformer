@@ -1,6 +1,7 @@
 class Player extends Creature
 {
   protected int swordCooldown, myCoin;
+  protected int myWax, myMeltCD;
   public Player()
   {
   myX = 500;
@@ -9,10 +10,12 @@ class Player extends Creature
   myLenY = 10;
   myVX = 0;
   myVY = 0;
-  myHP = 10;
+  myWax = 45;
+  myHP =50;
   isGrounded = false;
   swordCooldown = 0;
   iFrames = 0;
+  myMeltCD = 0;
   myCoin = 0;
   }
  
@@ -81,4 +84,47 @@ class Player extends Creature
   {
     return myCoin;
   }
+  public int getWax()
+  {
+    return myWax;
+  }
+  public void takeDamage(int damage, Creature source)
+  {
+    if(iFrames <= 0)
+    {
+      myWax-=damage;
+      iFrames = 3 * (int)frameRate;
+      myVY = -0.35;
+      if(myX > source.getX())
+      {
+        myVX = 0.7;
+      } else
+      {
+        myVX = -0.7;
+      }
+    }
+  }
+  public void burn(int num)
+  {
+    if(myWick - myWax < 3)
+    {
+      myWax-=num;
+    } else if(myWick <  myWax)
+    {
+      myWax = myWick - 3;
+    }else if(myWick - myWax >= 3)
+    {
+      myWick-=num;
+      burnCoolDown = (int)frameRate
+    }
+    if(myWick - myWax > 10)
+    {
+      myWick-=num;
+    }
+  }
+  public void burnDecrease(int num)
+  {
+    burnCooldown-=num;
+  }
+
 }
