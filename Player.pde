@@ -110,7 +110,7 @@ class Player extends Creature
   }
   public void burn(int num)
   {
-    burnCoolDown = (int)frameRate;
+    myMeltCD = (int)frameRate;
     if(myHP - myWax < 3)
     {
       myWax-=num;
@@ -128,6 +128,6 @@ class Player extends Creature
   }
   public void burnDecrease(int num)
   {
-    burnCooldown-=num;
+    myMeltCD-=num;
   }
 }
