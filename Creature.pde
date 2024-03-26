@@ -15,6 +15,13 @@ class Creature extends Box
   isGrounded = false;
   isFacingLeft = false;
   }
+
+  public void show()
+  {
+    fill(0,255,0);
+    super.show();
+    fill(255);
+  }
   public void move()
   {
     myX += myVX;
@@ -106,10 +113,10 @@ class Creature extends Box
       myVY = -0.35;
       if(myX > source.getX())
       {
-        myVX = 0.35;
+        myVX = 5.35;
       } else
       {
-        myVX = -0.35;
+        myVX = -5.35;
       }
     }
   }
