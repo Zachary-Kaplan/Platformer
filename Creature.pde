@@ -133,6 +133,7 @@ class Creature extends Box
       if(!collide)
       {
         move();
+        move();
         isGrounded = false;
       }
     }
