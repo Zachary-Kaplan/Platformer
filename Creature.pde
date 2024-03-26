@@ -121,7 +121,7 @@ class Creature extends Box
   {
     if(iFrames <= 0)
     {
-      myHP-=damage;
+      myWax-=damage;
       iFrames = 3 * (int)frameRate;
       myVY = -0.35;
       if(myX > source.getX())
@@ -142,6 +142,10 @@ class Creature extends Box
   }
   public void burn(int num)
   {
+    if(myWick - myWax > 10)
+    {
+      myWick-=num;
+    }
     myWick-=num;
     burnCooldown = (int)frameRate;
   }
