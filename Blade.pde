@@ -3,8 +3,8 @@ class Blade extends Box
   protected boolean isFacingLeft;
   public Blade(Player player)
   {
-  myLenX = 3;
-  myLenY = 5;
+  myLenX = 5;
+  myLenY = 3;
   myVX = 0;
   myVY = 0;
   isFacingLeft = player.getFacing();
