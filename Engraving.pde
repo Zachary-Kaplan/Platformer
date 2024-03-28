@@ -9,7 +9,14 @@ class Engraving
   {
     return engraveType;
   }
-  public void engraveFunction()
+  public void engraveFunction(Player player)
   {
+    if(engraveType.equals("Strength"))
+    {
+      player.setDamage(2);
+    } else
+    {
+      player.setDamage(1);
+    }
   }
 }
