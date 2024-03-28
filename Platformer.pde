@@ -1,15 +1,18 @@
-Player John;
+Player Will;
 Blade Sword;
 BoxMaker Jimmy;
+Lantern Wisp;
 ArrayList<Platform> Platforms = new ArrayList<Platform>();
 ArrayList<Enemy> Enemies = new ArrayList<Enemy>();
 ArrayList<Coin> Coins = new ArrayList<Coin>();
 public boolean up,left,right;
 void setup()
 {
-  John = new Player();
-  Sword = new Blade(John);
+  Platforms = new ArrayList<Platform>();
+  Will = new Player();
+  Sword = new Blade(Will);
   Jimmy = new BoxMaker();
+  Wisp = new Lantern(200,885);
   for(int i = 0; i < 3; i++)
   {
     Enemies.add(new Enemy());
@@ -27,46 +30,51 @@ void draw()
   background(255);
   if(up)
   {
-    John.jump(Platforms);
+    Will.jump(Platforms);
   } if(left)
   {
-    John.walkL();
+    Will.walkL();
   } if(right)
   {
-    John.walkR();
+    Will.walkR();
   }
-  John.show();
-  John.gravity();
-  if(John.getMeltCD() > 0)
+  Wisp.show();
+  if(Wisp.getSeated())
   {
-    John.burnDecrease(1);
+    Wisp.sittingDown(Will);
+  }
+  Will.show();
+  Will.gravity();
+  if(Will.getMeltCD() > 0)
+  {
+    Will.burnDecrease(1);
   } else
   {
-    John.burn(1);
+    Will.burn(1);
   }
   boolean collidesPlayerPlatform = false;
   for(int i = 0; i < Platforms.size(); i++)
   {
     Platforms.get(i).show();
-    if(willCollide(John, Platforms.get(i)))
+    if(willCollide(Will, Platforms.get(i)))
     {
       collidesPlayerPlatform = true;
     }
   }
-  John.setGrounded(collidesPlayerPlatform);
+  Will.setGrounded(collidesPlayerPlatform);
   if(!collidesPlayerPlatform)
   {
-    John.move();
+    Will.move();
   }
-  if(John.getCooldown() > 0)
+  if(Will.getCooldown() > 0)
   {
-    Sword.show(John);
-    John.decreaseCooldown(1);
+    Sword.show(Will);
+    Will.decreaseCooldown(1);
     for(int i = 0; i < Enemies.size(); i++)
     {
       if(willCollide(Sword,Enemies.get(i)))
       {
-        Enemies.get(i).takeDamage(1,John,Platforms);
+        Enemies.get(i).takeDamage(1,Will,Platforms);
         if(Enemies.get(i).getHP() <= 0)
         {
           for(int j = 0; j < (int)(3 * Math.random()); j++)
@@ -79,14 +87,14 @@ void draw()
       }
     }
   }
-  if(John.getIFrames() > 0)
+  if(Will.getIFrames() > 0)
   {
-    John.iFrameDecrease(1);
+    Will.iFrameDecrease(1);
   }
   
   for(int i = 0; i < Enemies.size(); i++)
   {
-    Enemies.get(i).pathFind(John,Platforms);
+    Enemies.get(i).pathFind(Will,Platforms);
     Enemies.get(i).gravity();
     Enemies.get(i).show();
     if(Enemies.get(i).getIFrames() > 0)
@@ -102,7 +110,7 @@ void draw()
       {
         collidesEnemyPlatform = true;
       }
-      if(willCollide(Enemies.get(i),John))
+      if(willCollide(Enemies.get(i),Will))
       {
         collidesEnemyPlayer = true;
       }
@@ -110,7 +118,7 @@ void draw()
     Enemies.get(i).setGrounded(collidesEnemyPlatform);
     if(collidesEnemyPlayer)
     {
-      John.takeDamage(5,Enemies.get(i));
+      Will.takeDamage(5,Enemies.get(i));
     }
     if(!collidesEnemyPlatform)
     {
@@ -129,7 +137,7 @@ void draw()
       {
         collidesCoinPlatform = true;
       }
-      if(willCollide(Coins.get(i),John))
+      if(willCollide(Coins.get(i),Will))
       {
         collidesCoinPlayer = true;
       }
@@ -141,15 +149,15 @@ void draw()
     }
     if(collidesCoinPlayer)
     {
-      John.changeCoin(1);
+      Will.changeCoin(1);
       Coins.remove(i);
       i--;
     }
   }
   fill(250,0,0);
-  text("Wick: " + John.getHP(), (float)John.getX(), (float)(John.getY() - 5));
-  text("Wax: " + John.getWax(), (float)John.getX(), (float)(John.getY() - 15));
-  text("Coins: " + John.getCoin(), (float)John.getX(), (float)(John.getY() - 25));
+  text("Wick: " + Will.getHP(), (float)Will.getX(), (float)(Will.getY() - 5));
+  text("Wax: " + Will.getWax(), (float)Will.getX(), (float)(Will.getY() - 15));
+  text("Coins: " + Will.getCoin(), (float)Will.getX(), (float)(Will.getY() - 25));
   fill(255);
 }
 
@@ -166,15 +174,25 @@ void keyPressed()
   {
     up = true;
   }
-  if((key == ' ') && (John.getCooldown() <= 0))
+  if((key == ' ') && (Will.getCooldown() <= 0))
   {
-    John.attack();
+    Will.attack();
+  }
+  if(key == 'e')
+  {
+    if(Wisp.getSeated())
+    {
+      Wisp.setSeated(false);
+    } else
+    {
+      Wisp.sitDown(Will);
+    }
   }
 }
 
 void keyReleased()
 {
-  John.setWalk(false);
+  Will.setWalk(false);
   if(key == 'a')
   {
     left = false;
