@@ -6,11 +6,11 @@ class Helm
   {
     maxEngraves = mEngrave;
   }
-  public void addEngrave(Engraving newEngrav)
+  public void addEngrave(String newEngrave)
   {
     if(myEngraves.size() < maxEngrav)
     {
-      myEngraves.add(newEngrav);
+      myEngraves.add(new Engraving(newEngrave));
     }
   }
   public void removeEngrave(String newEngrave)
@@ -39,11 +39,11 @@ class Helm
       text(myEngraves.get(i),10, 15 + (15 * i));
     }
   }
-  public void activateEngraves()
+  public void activateEngraves(Player player)
   {
     for(int i = 0; i < myEngraves.size(); i++)
     {
-      myEngraves.get(i).
+      myEngraves.get(i).engraveFunction(player);
     }
   }
 }
