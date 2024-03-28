@@ -84,7 +84,7 @@ void draw()
         {
           for(int j = 0; j < 4; j++)
           {
-            if(Math.random() < Will.getCoinChange())
+            if(Math.random() < Will.getCoinChance())
             {
               Coins.add(new Coin(Enemies.get(i)));
             }
