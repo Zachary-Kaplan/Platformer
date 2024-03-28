@@ -39,4 +39,11 @@ class Helm
       text(myEngraves.get(i),10, 15 + (15 * i));
     }
   }
+  public void activateEngraves()
+  {
+    for(int i = 0; i < myEngraves.size(); i++)
+    {
+      myEngraves.get(i).
+    }
+  }
 }
