@@ -1,0 +1,7 @@
+class g
+{
+  private g()
+  {
+  
+  }
+}
