@@ -2,6 +2,7 @@ Player Will;
 Blade Sword;
 BoxMaker Jimmy;
 Lantern Wisp;
+Helm Armor;
 ArrayList<Platform> Platforms = new ArrayList<Platform>();
 ArrayList<Enemy> Enemies = new ArrayList<Enemy>();
 ArrayList<Coin> Coins = new ArrayList<Coin>();
@@ -13,6 +14,7 @@ void setup()
   Sword = new Blade(Will);
   Jimmy = new BoxMaker();
   Wisp = new Lantern(200,885);
+  Armor = newHelm(2);
   for(int i = 0; i < 3; i++)
   {
     Enemies.add(new Enemy());
@@ -23,6 +25,7 @@ void setup()
   size(1000,1000);
   Platforms.add(new Platform(0,900,1000,100));
   Platforms.add(new Platform(700,890, 200, 15));
+  Helm
 }
 
 void draw()
@@ -77,9 +80,12 @@ void draw()
         Enemies.get(i).takeDamage(Will.getDamage(),Will,Platforms);
         if(Enemies.get(i).getHP() <= 0)
         {
-          for(int j = 0; j < (int)(3 * Math.random()); j++)
+          for(int j = 0; j < 4; j++)
           {
-            Coins.add(new Coin(Enemies.get(i)));
+            if(Math.random() < Will.getCoinChange())
+            {
+              Coins.add(new Coin(Enemies.get(i)));
+            }
           }
           Coins.add(new Coin(Enemies.get(i)));
           Enemies.remove(i);
