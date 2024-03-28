@@ -1,27 +1,42 @@
 class Helm
 {
-  protected int maxEngrav;
-  protected ArrayList<Engraving> myEngrav;
+  protected int maxEngraves;
+  protected ArrayList<Engraving> myEngraves;
   public Helm(int mEngrave)
   {
-    maxEngrav = mEngrave;
+    maxEngraves = mEngrave;
   }
   public void addEngrave(Engraving newEngrav)
   {
-    if(myEngrav.size() < maxEngrav)
+    if(myEngraves.size() < maxEngrav)
     {
-      myEngrav.add(newEngrav);
+      myEngraves.add(newEngrav);
     }
   }
   public void removeEngrave(String newEngrave)
   {
-    for(int i = 0; i < myEngrav.size(); i++)
+    for(int i = 0; i < myEngraves.size(); i++)
     {
-      if(myEngrav.get(i).getType().equals(newEngrave))
+      if(myEngraves.get(i).getType().equals(newEngrave))
       {
-        myEngrav.remove(i);
+        myEngraves.remove(i);
         break;
       }
+    }
+  }
+  public String getEngrave(int i)
+  {
+    return myEngraves.get(i);
+  }
+  public int getEngraveCount()
+  {
+    return myEngraves.size();
+  }
+  public void show()
+  {
+    for(int i = 0; i < myEngraves.size(); i++)
+    {
+      text(myEngraves.get(i),10, 15 + (15 * i));
     }
   }
 }
