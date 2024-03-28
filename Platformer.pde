@@ -25,7 +25,6 @@ void setup()
   size(1000,1000);
   Platforms.add(new Platform(0,900,1000,100));
   Platforms.add(new Platform(700,890, 200, 15));
-  Helm
 }
 
 void draw()
