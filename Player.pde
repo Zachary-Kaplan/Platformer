@@ -3,6 +3,7 @@ class Player extends Creature
   protected int swordCooldown, myMeltCD;
   protected int myWax, myCoin;
   protected int maxWax, maxWick, burnSpeed, damage;
+  protected double myCoinChance;
   public Player()
   {
   myX = 500;
@@ -22,6 +23,7 @@ class Player extends Creature
   myCoin = 0;
   damage = 1;
   burnSpeed = 1;
+  myCoinChance = 0.25;
   }
  
   //controls
@@ -113,6 +115,10 @@ class Player extends Creature
   {
     return myMeltCD;
   }
+  public double getCoinChance()
+  {
+    return myCoinChance;
+  }
   public void takeDamage(int damage, Creature source)
   {
     if(iFrames <= 0)
@@ -162,5 +168,9 @@ class Player extends Creature
   public void setDamage(int num)
   {
     damage = num;
+  }
+  public void setCoinChance(double doub)
+  {
+    myCoinChance = doub;
   }
 }
