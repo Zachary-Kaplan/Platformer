@@ -9,4 +9,7 @@ class Engraving
   {
     return engraveType;
   }
+  public void engraveFunction()
+  {
+  }
 }
