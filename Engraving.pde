@@ -18,5 +18,19 @@ class Engraving
     {
       player.setDamage(1);
     }
+    if(engraveType.equals("Wick"))
+    {
+      player.setWick(75);
+    } else
+    {
+      player.setWick(50);
+    }
+    if(engraveType.equals("Coin"))
+    {
+      player.setCoinChance(0.5);
+    } else
+    {
+      player.setCoinChance(0.25);
+    }
   }
 }
