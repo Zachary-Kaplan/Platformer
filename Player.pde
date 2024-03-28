@@ -130,4 +130,12 @@ class Player extends Creature
   {
     myMeltCD-=num;
   }
+  public void setHP(int num)
+  {
+    myHP = num;
+  }
+  public void setWax(int num)
+  {
+    myWax = num;
+  }
 }
