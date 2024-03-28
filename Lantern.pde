@@ -15,15 +15,15 @@ class Lantern extends Box
   {
     if(dist((float)myX,(float)myY,(float)player.getX(),(float)player.getY()) < 21)
     {
-      player.setHP(50);
-      player.setWax(45);
+      player.setHP(player.getMaxWick());
+      player.setWax(player.getMaxWax());
       isSeated = true;
     }
   }
   public void sittingDown(Player player)
   {
-    player.setHP(50);
-    player.setWax(45);
+    player.setHP(player.getMaxWick());
+    player.setWax(player.getMaxWax());
     player.setX((int)this.getCenterX() - (player.getLenX()/2));
     player.setY((int)this.getCenterY() - (player.getLenY()/2));
   }
