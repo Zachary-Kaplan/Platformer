@@ -1,7 +1,1 @@
-class g
-{
-  private g()
-  {
-  
-  }
-}
+
