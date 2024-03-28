@@ -1,7 +1,8 @@
 class Player extends Creature
 {
-  protected int swordCooldown, myCoin;
-  protected int myWax, myMeltCD;
+  protected int swordCooldown, myMeltCD;
+  protected int myWax, myCoin;
+  protected int maxWax, maxWick, burnSpeed, damage;
   public Player()
   {
   myX = 500;
@@ -10,13 +11,17 @@ class Player extends Creature
   myLenY = 10;
   myVX = 0;
   myVY = 0;
-  myWax = 45;
-  myHP =50;
+  maxWax = 45;
+  maxWick = 50;
+  myWax = maxWax;
+  myHP =maxWick;
   isGrounded = false;
   swordCooldown = 0;
   iFrames = 0;
   myMeltCD = 0;
   myCoin = 0;
+  damage = 1;
+  burnSpeed = 1;
   }
  
   //controls
@@ -87,6 +92,22 @@ class Player extends Creature
   public int getWax()
   {
     return myWax;
+  }
+  public int getMaxWax()
+  {
+    return maxWax;
+  }
+  public int getMaxWick()
+  {
+    return maxWick;
+  }
+  public int getDamage()
+  {
+    return damage;
+  }
+  public int getBurnSpeed()
+  {
+    return burnSpeed;
   }
   public int getMeltCD()
   {
