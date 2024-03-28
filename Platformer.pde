@@ -47,7 +47,7 @@ void draw()
   Will.gravity();
   if(Will.getMeltCD() > 0)
   {
-    Will.burnDecrease(1);
+    Will.burnDecrease(Will.getBurnSpeed());
   } else
   {
     Will.burn(1);
@@ -74,7 +74,7 @@ void draw()
     {
       if(willCollide(Sword,Enemies.get(i)))
       {
-        Enemies.get(i).takeDamage(1,Will,Platforms);
+        Enemies.get(i).takeDamage(Will.getDamage(),Will,Platforms);
         if(Enemies.get(i).getHP() <= 0)
         {
           for(int j = 0; j < (int)(3 * Math.random()); j++)
