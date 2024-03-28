@@ -159,4 +159,8 @@ class Player extends Creature
   {
     myWax = num;
   }
+  public void setDamage(int num)
+  {
+    damage = num;
+  }
 }
